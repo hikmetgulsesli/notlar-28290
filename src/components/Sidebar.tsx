@@ -1,19 +1,33 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { TagChip } from './TagChip';
+import { useTags } from '../hooks/useTags';
 
 export function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const { tags } = useTags();
+
+  const activeTag = searchParams.get('tag');
 
   const isActive = (tab: string) => {
-    if (tab === 'all' && location.pathname === '/') return true;
+    if (tab === 'all' && location.pathname === '/' && !activeTag) return true;
     if (tab === 'favorites' && location.pathname === '/?filter=favorites') return true;
     if (tab === 'archive' && location.pathname === '/?filter=archive') return true;
     if (tab === 'trash' && location.pathname === '/?filter=trash') return true;
     return false;
   };
 
+  const handleTagClick = (tag: string) => {
+    navigate(`/?tag=${encodeURIComponent(tag)}`);
+  };
+
+  const handleClearTag = () => {
+    navigate('/');
+  };
+
   return (
-    <aside className="h-screen w-64 fixed left-0 top-0 pt-16 bg-slate-900 flex flex-col gap-2 p-4 z-40">
+    <aside className="h-screen w-64 fixed left-0 top-0 pt-16 bg-slate-900 flex flex-col gap-2 p-4 z-40 border-r border-outline-variant/5">
       <div className="mb-6 px-3">
         <h2 className="font-headline font-bold text-slate-100 tracking-tight text-lg">
           Kütüphane
@@ -81,31 +95,44 @@ export function Sidebar() {
           Etiketler
         </h3>
         <div className="flex flex-wrap gap-2">
-          <span className="px-2 py-1 bg-surface-variant text-on-surface-variant text-[11px] font-medium rounded-sm hover:bg-secondary-container transition-colors cursor-pointer">
-            #react
-          </span>
-          <span className="px-2 py-1 bg-surface-variant text-on-surface-variant text-[11px] font-medium rounded-sm hover:bg-secondary-container transition-colors cursor-pointer">
-            #notlar
-          </span>
-          <span className="px-2 py-1 bg-surface-variant text-on-surface-variant text-[11px] font-medium rounded-sm hover:bg-secondary-container transition-colors cursor-pointer">
-            #proje
-          </span>
-          <span className="px-2 py-1 bg-surface-variant text-on-surface-variant text-[11px] font-medium rounded-sm hover:bg-secondary-container transition-colors cursor-pointer">
-            #tasarım
-          </span>
+          {tags.length === 0 ? (
+            <span className="text-slate-500 text-xs">Henüz etiket yok</span>
+          ) : (
+            tags.map(tag => (
+              <TagChip
+                key={tag.name}
+                tag={tag.name}
+                count={tag.count}
+                active={activeTag === tag.name}
+                onClick={handleTagClick}
+              />
+            ))
+          )}
         </div>
       </div>
 
+      {activeTag && (
+        <div className="mt-4 px-3">
+          <button
+            onClick={handleClearTag}
+            className="flex items-center gap-2 text-xs text-slate-400 hover:text-blue-400 transition-colors cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-sm">filter_list_off</span>
+            <span>Filtreyi temizle</span>
+          </button>
+        </div>
+      )}
+
       <div className="mt-auto pb-4">
         <button
-          className="w-full text-left text-slate-400 px-3 py-2 hover:bg-slate-800 rounded-lg transition-all flex items-center gap-3 font-sans text-sm tracking-wide"
+          className="w-full text-left text-slate-400 px-3 py-2 hover:bg-slate-800 rounded-lg transition-all flex items-center gap-3 font-sans text-sm tracking-wide cursor-pointer"
           aria-label="Yardım"
         >
           <span className="material-symbols-outlined text-[20px]">help_outline</span>
           <span>Yardım</span>
         </button>
         <button
-          className="w-full text-left text-slate-400 px-3 py-2 hover:bg-slate-800 rounded-lg transition-all flex items-center gap-3 font-sans text-sm tracking-wide"
+          className="w-full text-left text-slate-400 px-3 py-2 hover:bg-slate-800 rounded-lg transition-all flex items-center gap-3 font-sans text-sm tracking-wide cursor-pointer"
           aria-label="Gizlilik"
         >
           <span className="material-symbols-outlined text-[20px]">lock</span>
