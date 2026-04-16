@@ -1,0 +1,21 @@
+#!/bin/bash
+# Scope enforcement pre-commit hook (5-model consensus)
+SCOPE_FILE=".story-scope-files"
+if [ ! -f "$SCOPE_FILE" ]; then exit 0; fi
+BLOCKED=""
+for file in $(git diff --cached --name-only); do
+  if ! grep -qxF "$file" "$SCOPE_FILE"; then
+    BLOCKED="$BLOCKED  BLOCKED: $file
+"
+  fi
+done
+if [ -n "$BLOCKED" ]; then
+  echo ""
+  echo "SCOPE_HOOK: Commit REJECTED — files outside scope_files:"
+  echo -e "$BLOCKED"
+  echo "Allowed: $(cat $SCOPE_FILE | tr '
+' ', ')"
+  echo "Fix: git reset HEAD <file> to unstage out-of-scope files"
+  echo ""
+  exit 1
+fi
