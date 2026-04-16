@@ -1,0 +1,19 @@
+=== US-002: Not Olusturma ve Duzenleme ===
+COMPLETED: 2026-04-16T06:16:37+00:00
+FILES CHANGED:
+  - src/pages/EditorPage.tsx (enhanced: preview toggle, delete confirmation, tag keyboard handling, draft auto-save)
+  - src/hooks/useAutoSave.ts (new: useAutoSave + useDraft hooks)
+  - src/utils/markdown.ts (new: markdown-to-HTML renderer)
+  - src/test/editor.test.ts (new: editor component tests)
+  - src/index.css (added markdown-preview styles)
+  - package.json (+ @testing-library/user-event dep)
+  - package-lock.json (new)
+KEY DECISIONS:
+  - Used useCallback for all event handlers to prevent unnecessary re-renders
+  - Implemented keyboard-based tag input (Enter/comma adds, Backspace removes last tag)
+  - Draft auto-save with 500ms debounce using useEffect + setTimeout pattern
+  - Delete confirmation with 3-second auto-dismiss (double-click pattern)
+  - Markdown preview toggle using custom renderMarkdownToHTML function
+  - Ctrl+S keyboard shortcut for save, Escape for cancel
+DEPENDENCIES ADDED:
+  - @testing-library/user-event (needed for editor tests)
