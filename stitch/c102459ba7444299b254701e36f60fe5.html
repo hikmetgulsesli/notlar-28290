@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#b4c5ff",
+                        "primary-container": "#2563eb",
+                        "on-primary": "#002a78",
+                        "outline": "#8d90a0",
+                        "primary": "#b4c5ff",
+                        "inverse-primary": "#0053db",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "inverse-surface": "#dae2fd",
+                        "tertiary": "#ffb596",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary-fixed": "#360f00",
+                        "background": "#0b1326",
+                        "secondary-fixed": "#d8e3fb",
+                        "surface-bright": "#31394d",
+                        "outline-variant": "#434655",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-primary-fixed": "#00174b",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#bc4800",
+                        "surface-container-high": "#222a3d",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-container-lowest": "#060e20",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#131b2e",
+                        "on-tertiary": "#581e00",
+                        "on-background": "#dae2fd",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "surface-container-highest": "#2d3449",
+                        "inverse-on-surface": "#283044",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface-variant": "#2d3449",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-tertiary-container": "#ffede6",
+                        "on-primary-container": "#eeefff",
+                        "on-secondary-fixed": "#111c2d",
+                        "surface-dim": "#0b1326",
+                        "secondary": "#bcc7de",
+                        "error-container": "#93000a",
+                        "on-surface": "#dae2fd",
+                        "secondary-container": "#3e495d",
+                        "surface-container": "#171f33",
+                        "surface": "#0b1326",
+                        "on-secondary-container": "#aeb9d0",
+                        "on-surface-variant": "#c3c6d7",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-secondary": "#263143"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary/30 overflow-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl shadow-2xl shadow-black/40 flex justify-between items-center px-6 py-3 w-full">
+<div class="flex items-center gap-6">
+<span class="text-2xl font-bold tracking-tighter text-blue-400">Notlar</span>
+<div class="hidden md:flex bg-slate-900/50 rounded-lg px-3 py-1.5 items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-sm">search</span>
+<span class="text-slate-400 text-sm">Arama...</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-1">
+<button class="p-2 text-slate-400 hover:bg-slate-800/50 transition-colors duration-200 active:scale-95 duration-100 rounded-lg">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 text-slate-400 hover:bg-slate-800/50 transition-colors duration-200 active:scale-95 duration-100 rounded-lg">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg font-semibold text-sm active:scale-95 duration-100 transition-colors">
+                New Note
+            </button>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-16 bg-slate-900 hidden md:flex flex-col gap-2 p-4 border-r border-outline-variant/10">
+<div class="mb-4 px-3">
+<h2 class="text-on-background font-bold tracking-tight text-lg">Library</h2>
+<p class="text-slate-400 text-xs">Your digital atelier</p>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 text-blue-400 bg-blue-500/10 rounded-lg px-3 py-2 cursor-pointer active:opacity-80 transition-all">
+<span class="material-symbols-outlined">description</span>
+<span class="font-sans text-sm tracking-wide font-semibold">All Notes</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 px-3 py-2 cursor-pointer active:opacity-80 transition-all hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined">star</span>
+<span class="font-sans text-sm tracking-wide">Favorites</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 px-3 py-2 cursor-pointer active:opacity-80 transition-all hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined">archive</span>
+<span class="font-sans text-sm tracking-wide">Archive</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 px-3 py-2 cursor-pointer active:opacity-80 transition-all hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined">delete</span>
+<span class="font-sans text-sm tracking-wide">Trash</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 px-3 py-2 cursor-pointer active:opacity-80 transition-all hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-sans text-sm tracking-wide">Settings</span>
+</a>
+</div>
+<button class="mt-4 mx-3 bg-surface-container-highest hover:bg-surface-bright text-primary text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center gap-2 transition-all">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+            New Collection
+        </button>
+<div class="mt-auto flex flex-col gap-1">
+<a class="flex items-center gap-3 text-slate-400 px-3 py-2 cursor-pointer active:opacity-80 transition-all hover:bg-slate-800 rounded-lg text-xs">
+<span class="material-symbols-outlined text-sm">help_outline</span>
+<span>Help</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 px-3 py-2 cursor-pointer active:opacity-80 transition-all hover:bg-slate-800 rounded-lg text-xs">
+<span class="material-symbols-outlined text-sm">lock</span>
+<span>Privacy</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas (Background for the Modal) -->
+<main class="ml-0 md:ml-64 pt-16 h-screen overflow-y-auto">
+<article class="max-w-4xl mx-auto p-12 space-y-8 opacity-40 blur-[2px] pointer-events-none">
+<div class="space-y-4">
+<div class="flex items-center gap-3 text-xs text-on-surface-variant font-label tracking-[0.05em] uppercase">
+<span>Library</span>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span>All Notes</span>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-primary font-bold">Project_Phoenix.md</span>
+</div>
+<h1 class="text-5xl font-extrabold tracking-tight text-on-surface leading-none">Project Phoenix: Next Generation Architecture</h1>
+<div class="flex gap-4 items-center">
+<span class="bg-surface-variant px-3 py-1 rounded-sm text-[10px] font-bold text-on-surface-variant">ARCHIVE</span>
+<span class="text-xs text-on-surface-variant mono">Updated: Oct 12, 2023</span>
+</div>
+</div>
+<section class="prose prose-invert max-w-none space-y-6 text-on-surface/80 leading-relaxed text-lg">
+<p>The goal of Project Phoenix is to rebuild our core infrastructure using a serverless-first approach, prioritizing global latency and developer experience. By shifting away from monolith services, we enable independent scaling for our high-traffic ingestion endpoints.</p>
+<div class="bg-surface-container-lowest p-6 rounded-lg mono text-sm text-primary-fixed border-l-4 border-primary">
+<span class="block text-outline-variant mb-2">// Proposed scaling strategy</span><br/>
+                    const scalingPolicy = new AutoScaler({<br/>
+                      min: 2,<br/>
+                      max: 100,<br/>
+                      strategy: 'proactive'<br/>
+                    });
+                </div>
+<p>We are currently evaluating the performance impact of the new edge middleware. Initial benchmarks suggest a 40% reduction in Time to First Byte (TTFB) across APAC regions.</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-6 rounded-xl aspect-square overflow-hidden">
+<img class="w-full h-full object-cover rounded-lg opacity-80 mix-blend-screen" data-alt="Technical schematic diagram of global server architecture with glowing blue lines on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6Y1hPC4PMR2I1MfJSuUVehm7cWtCKUh_67AD_gwwuWUTcmCMKyft4Aki24glMhRqlKYySBQl0zrhnQwIfnhcur5sChLdUh28vxDkO-6DieQir3VoarojschLqfr83nrNQRd6OBnIBguarpSV9cIxk5oW-4TI2lZTRkOLorylTsq8ZKSGdVQxmw4LXIOdTd1E0pKRzcS4l4PNVeglX4oKMHI4dtN3ORJpqAiEJE04McIWeCJdZpUVzJ2gzEnL5YpZ-PHJX06puePU"/>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col justify-end">
+<h3 class="font-bold text-on-surface mb-2">Regional Distribution</h3>
+<p class="text-sm text-on-surface-variant">The rollout will begin with us-east-1 and eu-central-1 clusters by Q4.</p>
+</div>
+</div>
+</section>
+</article>
+</main>
+<!-- CONFIRMATION MODAL OVERLAY -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/60 backdrop-blur-md">
+<!-- Dialog Box (Tonal Layering & Glassmorphism) -->
+<div class="w-full max-w-md bg-surface-container-highest/80 backdrop-blur-xl rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.4)] overflow-hidden border border-outline-variant/10">
+<div class="p-8">
+<!-- Icon Header -->
+<div class="w-12 h-12 rounded-full bg-error-container/30 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<!-- Text Content -->
+<div class="space-y-2 mb-8">
+<h2 class="text-2xl font-extrabold tracking-tight text-on-surface">Notu silmek istediğinizden emin misiniz?</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed">Bu işlem geri alınamaz. Bu not kalıcı olarak silinecek ve arşivinizden kaldırılacaktır.</p>
+</div>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row-reverse gap-3">
+<button class="flex-1 bg-gradient-to-br from-red-500 to-error-container text-on-primary-container px-6 py-3 rounded-lg font-bold text-sm transition-all active:scale-95 duration-100 shadow-lg shadow-red-900/20">
+                        Sil
+                    </button>
+<button class="flex-1 text-on-surface-variant hover:bg-surface-bright px-6 py-3 rounded-lg font-semibold text-sm transition-all active:scale-95 duration-100">
+                        İptal
+                    </button>
+</div>
+</div>
+<!-- Bottom Accent Line (Subtle Visual Polish) -->
+<div class="h-1 w-full bg-error/20"></div>
+</div>
+</div>
+</body></html>

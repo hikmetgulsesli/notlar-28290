@@ -1,0 +1,337 @@
+## 1. Genel Bakış
+
+Notlar uygulaması, kullanıcıların markdown formatında notlar oluşturmasına, düzenlemesine, etiketlemesine ve aramasına olanak tanıyan modern bir web uygulamasıdır. Uygulama tamamen tarayıcıda çalışır ve veriler localStorage üzerinde saklanır — sunucu gerektirmez. Türkçe arayüzlü, hızlı ve erişilebilir bir deneyim sunmayı hedefler.
+
+Hedef kitle: Günlük notlarını düzenli tutmak isteyen profesyoneller, öğrenciler ve içerik üreticileri. Markdown desteği sayesinde teknik dokümantasyon yazmak isteyen geliştiriciler de uygulamayı kullanabilir.
+
+## 2. Hedefler
+
+- Kullanıcılar markdown formatında not yazabilmeli ve anlık önizleme görebilmeli
+- Notları etiketlerle kategorize edebilmeli ve etiketlere göre filtreleyebilmeli
+- Başlık ve içerik bazlı tam metin arama yapabilmeli
+- Notları tarihe göre sıralayabilmeli (en yeni/en eski)
+- localStorage ile kalıcı veri saklama — sayfa yenilense bile veri korunmalı
+- Boş, düzenleme ve arama sonuç yok durumları için kullanıcı dostu feedback
+- Tüm interactive elementlerde klavye navigasyonu
+- Responsive tasarım: mobil 320px — desktop 1920px+
+
+## 3. Tech Stack Detayı
+
+- **Framework:** React 18.3
+- **Build:** Vite 5.x
+- **Styling:** Tailwind CSS 3.4
+- **State:** useState + useReducer (yerel state, localStorage senkronizasyonu)
+- **Storage:** localStorage API (veri kalıcılığı için)
+- **Routing:** React Router DOM 6.x (SPA içi navigasyon)
+- **Markdown:** react-markdown + remark-gfm (parsing ve render)
+- **Icons:** Lucide React (emoji yok, sadece SVG icon)
+- **ID Generation:** crypto.randomUUID() (not ve etiket ID'leri için)
+- **Language:** TypeScript 5.x
+
+## 4. Fonksiyonel Gereksinimler
+
+### 4.1 Not Oluşturma
+- Başlık (zorunlu, max 100 karakter)
+- İçerik (zorunlu, markdown formatında, sınırsız uzunluk)
+- Etiketler (opsiyonel, virgülle ayrılmış string, max 10 etiket)
+- Oluşturulma tarihi: otomatik, ISO 8601 formatında
+- Güncellenme tarihi: otomatik, her düzenlemede güncellenir
+- Hata: "Başlık boş bırakılamaz" — başlık girilmeden kaydet butonu pasif
+- Başarı: Notlar listesine dön, yeni not listede en üstte görünür
+
+### 4.2 Not Düzenleme
+- Mevcut notun tüm alanları düzenlenebilir
+- Güncelleme tarihi otomatik yenilenir
+- Değişiklikler localStorage'a anında kaydedilir
+- "Geri al" desteği yok — kullanıcı dikkatli olmalı
+
+### 4.3 Not Silme
+- Her not kartında silme butonu (sağ üst köşede)
+- Tıklama sonrası onay modalı açılır: "Bu notu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
+- Onay butonu: "Sil", iptal butonu: "İptal"
+- Başarılı silme sonrası: kullanıcı notlar listesine yönlendirilir, toast mesajı görünür
+
+### 4.4 Not Listeleme
+- Tüm notlar kartlar halinde listelenir
+- Her kart: başlık, etiketler (chip olarak), güncellenme tarihi, önizleme (içeriğin ilk 150 karakteri)
+- Sıralama: tarihe göre azalan (en yeni üstte) — varsayılan
+- Sayfa başında "Yeni Not" butonu
+
+### 4.5 Arama
+- Üst bar'da arama inputu
+- Başlık VE içerik bazlı arama (case-insensitive)
+- Her kelime yazıldığında filtrele (debounce yok, anlık)
+- Arama boşken: tüm notlar gösterilir
+- Sonuç yokken: "Sonuç bulunamadı" mesajı ve arama kutusuna odaklanılır
+
+### 4.6 Etiketleme ve Filtreleme
+- Her nota en fazla 10 etiket eklenebilir
+- Etiketler virgül veya enter ile ayrılır
+- Etiket inputu: "Etiketler (virgülle ayırın)" placeholder
+- Sol sidebar'da tüm kullanılan etiketler listesi
+- Etikete tıklayınca o etikete sahip notlar filtrelenir
+- Aktif filtre: seçili etiket vurgulu, "Filtreyi temizle" butonu görünür
+
+### 4.7 Markdown Editör
+- Split view: sol tarafta editor (textarea), sağ tarafta canlı preview
+- Editor: monospace font, syntax highlighting yok (plain markdown yazımı)
+- Preview: render edilmiş markdown — başlıklar, listeler, linkler, kod blokları
+- Tab tuşu: editor'de 2 space ekler (default browser davranışı engellenir)
+
+### 4.8 Empty States
+- İlk açılış (henüz not yok): "Henüz notunuz yok. İlk notunuzu oluşturun!" + büyük "Yeni Not" butonu
+- Arama sonuç yok: "Sonuç bulunamadı" altında "Aramayı temizle" linki
+- Etiket filtresi sonucu yok: "Bu etikete sahip not bulunamadı"
+
+## 5. Veri Modeli
+
+### Note Entity
+```typescript
+interface Note {
+  id: string;           // crypto.randomUUID()
+  title: string;        // max 100 chars
+  content: string;      // markdown string
+  tags: string[];       // max 10 items
+  createdAt: string;    // ISO 8601
+  updatedAt: string;    // ISO 8601
+}
+```
+
+### localStorage Schema
+```
+Key: "notlar-28290-notes"
+Value: Note[] (JSON stringifiy)
+```
+
+### Tag Entity (derived, computed)
+```typescript
+interface TagCount {
+  name: string;
+  count: number;
+}
+```
+
+## 6. UI/UX Gereksinimleri
+
+### 6.1 Design System
+
+**Aesthetic:** Minimal — temiz çizgiler, bol beyaz alan, odak noktası içerik
+
+**Renk Paleti:**
+- Primary: #2563EB (mavi)
+- Secondary: #64748B (slate)
+- Background: #FFFFFF
+- Surface: #F8FAFC (hafif gri)
+- Text Primary: #1E293B
+- Text Secondary: #64748B
+- Border: #E2E8F0
+- Success: #22C55E
+- Error: #EF4444
+- Warning: #F59E0B
+
+**Tipografi:**
+- Headings: Inter, sans-serif (font-weight: 600-700)
+- Body: Inter, sans-serif (font-weight: 400)
+- Code/Mono: JetBrains Mono, monospace
+- Scale: 12/14/16/18/24/32 px
+
+**Icon Library:** Lucide React
+- Kullanılacaklar: Plus, Search, Tag, Trash2, Edit3, ArrowLeft, X, Check
+
+**Spacing Scale (px):** 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64
+
+**Border Radius:**
+- Small (chip, input): 6px
+- Medium (card, button): 8px
+- Large (modal): 12px
+
+**Shadows:**
+- Card: 0 1px 3px rgba(0,0,0,0.1)
+- Modal: 0 10px 40px rgba(0,0,0,0.15)
+- Hover: 0 4px 12px rgba(0,0,0,0.1)
+
+### 6.2 Layout
+
+```
+┌─────────────────────────────────────────────────────┐
+│  Header: Logo + Arama Kutusu + Yeni Not Butonu       │
+├────────────┬────────────────────────────────────────┤
+│            │                                        │
+│  Sidebar   │  Main Content Area                     │
+│  (Etiket   │  - Notes Grid / Note Detail / Editor   │
+│   Listesi) │                                        │
+│            │                                        │
+│  200px     │  Esnek genişlik                        │
+│            │                                        │
+└────────────┴────────────────────────────────────────┘
+```
+
+- Mobile: Sidebar gizli, hamburger menü ile açılır
+- Tablet: Sidebar 240px, content esnek
+- Desktop: Sidebar 240px, max-content-width: 1200px
+
+### 6.3 Components
+
+**NoteCard:**
+- Başlık (bold, 1 satır, ellipsis)
+- Etiket chip'leri (max 3 görünür, "+N" varsa göster)
+- Tarih (gün/ay/yıl formatında Türkçe)
+- İçerik önizleme (150 char, ellipsis)
+- Hover: subtle shadow artışı
+- İki tıklama: note detail/edit görünümü
+
+**Button Variants:**
+- Primary: bg-primary, text-white, hover:darken
+- Secondary: bg-surface, text-primary, border
+- Danger: bg-error, text-white
+- Ghost: transparent, hover:bg-surface
+
+**Input:**
+- Border: 1px solid border-color
+- Focus: 2px primary outline
+- Error: 1px error border + error text altında
+
+**Modal:**
+- Overlay: rgba(0,0,0,0.4)
+- Content: bg-white, rounded-large, shadow-modal
+- Kapatma: X butonu sağ üst + Escape tuşu
+
+**Tag Chip:**
+- bg-surface, text-secondary, rounded-6px
+- Padding: 4px 8px
+- Hover: bg-primary/10, text-primary
+
+## 7. Non-Functional Requirements
+
+### 7.1 Performans
+- İlk yükleme (boş cache): < 1.5 saniye
+- Arama filtreleme: < 50ms
+- Not kaydetme: < 100ms
+- Bundle size hedefi: < 150KB (gzip, critical JS)
+
+### 7.2 Erişilebilirlik (WCAG 2.1 AA)
+- Klavye navigasyonu: Tab/Shift+Tab ile tüm elementlere erişim
+- Enter/Space ile buton ve link aktivasyonu
+- Screen reader: ARIA labels, role attributes, live regions (arama sonuçları)
+- Kontrast: tüm metinler 4.5:1 ve üzeri
+- Focus visible: tüm interactive elementlerde 2px outline
+- Touch hedefleri: minimum 44x44px
+
+### 7.3 Tarayıcı Desteği
+- Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+- iOS Safari 14+, Android Chrome 90+
+- Responsive: 320px (mobile) — 1920px (desktop)
+- localStorage desteği zorunlu
+
+## 8. Proje Yapısı
+
+```
+notlar-28290/
+├── index.html
+├── package.json
+├── vite.config.ts
+├── tailwind.config.js
+├── tsconfig.json
+├── src/
+│   ├── components/
+│   │   ├── Header.tsx
+│   │   ├── Sidebar.tsx
+│   │   ├── NoteCard.tsx
+│   │   ├── NoteEditor.tsx
+│   │   ├── NoteDetail.tsx
+│   │   ├── SearchBar.tsx
+│   │   ├── TagChip.tsx
+│   │   ├── TagInput.tsx
+│   │   ├── Modal.tsx
+│   │   ├── Button.tsx
+│   │   └── EmptyState.tsx
+│   ├── screens/
+│   │   ├── AnaSayfa.tsx        # Not listesi (dashboard)
+│   │   ├── NoteEditScreen.tsx  # Yeni not / Düzenle
+│   │   └── NoteViewScreen.tsx  # Not detay görünümü
+│   ├── hooks/
+│   │   ├── useNotes.ts         # CRUD + localStorage senkronizasyonu
+│   │   ├── useSearch.ts        # Arama filtreleme
+│   │   └── useTags.ts          # Tag computation + filtering
+│   ├── utils/
+│   │   ├── localStorage.ts     # get/set notes
+│   │   └── dateFormat.ts       # Türkçe tarih formatı
+│   ├── types/
+│   │   └── index.ts            # Note, Tag interfaces
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+└── public/
+```
+
+## 9. Window State (testing/dogfood)
+
+```typescript
+window.app = {
+  state: 'idle', // idle | loading | error
+  notes: [],      // Note[]
+  activeFilter: null, // string | null (tag name)
+  searchQuery: '',   // string
+}
+```
+
+## 10. Ekranlar
+
+| # | Ekran Adı | Tür | Açıklama |
+|---|-----------|-----|----------|
+| 1 | Ana Sayfa | dashboard | Sol sidebar'da etiket listesi, sağda not kartları grid'i. Üstte arama çubuğu ve "Yeni Not" butonu |
+| 2 | Not Detay | detail | Tek notun tam içeriği markdown render edilmiş halde. Üstte başlık, etiketler, tarih. Sağ üstte "Düzenle" ve "Sil" butonları |
+| 3 | Not Editör | form | Split view: sol editor (textarea), sağ canlı preview. Başlık input, etiket input, kaydet/iptal butonları |
+| 4 | Onay Modal | dialog | "Notu silmek istediğinizden emin misiniz?" mesajı, Sil/İptal butonları |
+| 5 | Arama Sonuç Yok | empty-state | "Sonuç bulunamadı" mesajı, "Aramayı temizle" linki |
+| 6 | Etiket Sonuç Yok | empty-state | "Bu etikete sahip not bulunamadı" mesajı, "Filtreyi temizle" linki |
+| 7 | Hiç Not Yok | empty-state | İlk kullanımda gösterilir. "Henüz notunuz yok" mesajı, büyük "Yeni Not" butonu |
+
+## 11. Kullanıcı Akışları
+
+### Yeni Not Oluşturma
+1. Ana Sayfa'da "Yeni Not" butonuna tıkla
+2. Not Editör ekranı açılır
+3. Başlık gir (zorunlu)
+4. İçerik yaz (markdown, sağda anlık önizleme)
+5. Etiket ekle (opsiyonel)
+6. "Kaydet" butonuna tıkla
+7. Ana Sayfa'ya dön, yeni not en üstte
+
+### Not Düzenleme
+1. Ana Sayfa'da not kartına tıkla
+2. Not Detay ekranı açılır
+3. "Düzenle" butonuna tıkla
+4. Not Editör ekranı açılır (mevcut verilerle)
+5. Değişiklik yap
+6. "Kaydet" butonuna tıkla
+7. Not Detay'a dön
+
+### Not Silme
+1. Not Detay ekranında "Sil" butonuna tıkla
+2. Onay Modal açılır
+3. "Sil" butonuna tıkla
+4. Ana Sayfa'ya dön, toast mesajı görünür
+
+### Arama
+1. Arama kutusuna yaz
+2. Anlık olarak notlar filtrelenir (başlık + içerik)
+3. Sonuç yoksa "Sonuç bulunamadı" gösterilir
+4. Aramayı temizlemek için X butonuna tıkla
+
+### Etiket Filtreleme
+1. Sol sidebar'da etikete tıkla
+2. O etikete sahip notlar listelenir
+3. "Filtreyi temizle" butonu görünür
+4. Tıklayınca tüm notlar gösterilir
+
+Generate a SEPARATE screen design for EVERY page, view, modal, dialog, tab panel, and settings screen described in this PRD. Do NOT skip ANY screen — even if it seems minor.
+
+MANDATORY SCREENS:
+- If the PRD mentions "settings" or "ayarlar" → generate a Settings screen
+- If the PRD mentions tabs or bottom navigation → generate EACH tab view as a separate screen
+- If the PRD mentions modals (statistics, help, share, confirmation) → generate each as a separate screen
+- If the PRD mentions error states, empty states, loading states → generate those too
+- Generate at least as many screens as there are distinct views/pages/modals in the PRD
+
+All visible text must be in Turkish. Use a dark, modern theme.

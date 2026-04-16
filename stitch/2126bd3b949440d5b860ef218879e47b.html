@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notlar - Digital Atelier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#b4c5ff",
+                        "primary-container": "#2563eb",
+                        "on-primary": "#002a78",
+                        "outline": "#8d90a0",
+                        "primary": "#b4c5ff",
+                        "inverse-primary": "#0053db",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "inverse-surface": "#dae2fd",
+                        "tertiary": "#ffb596",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary-fixed": "#360f00",
+                        "background": "#0b1326",
+                        "secondary-fixed": "#d8e3fb",
+                        "surface-bright": "#31394d",
+                        "outline-variant": "#434655",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-primary-fixed": "#00174b",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#bc4800",
+                        "surface-container-high": "#222a3d",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-container-lowest": "#060e20",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#131b2e",
+                        "on-tertiary": "#581e00",
+                        "on-background": "#dae2fd",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "surface-container-highest": "#2d3449",
+                        "inverse-on-surface": "#283044",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface-variant": "#2d3449",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-tertiary-container": "#ffede6",
+                        "on-primary-container": "#eeefff",
+                        "on-secondary-fixed": "#111c2d",
+                        "surface-dim": "#0b1326",
+                        "secondary": "#bcc7de",
+                        "error-container": "#93000a",
+                        "on-surface": "#dae2fd",
+                        "secondary-container": "#3e495d",
+                        "surface-container": "#171f33",
+                        "surface": "#0b1326",
+                        "on-secondary-container": "#aeb9d0",
+                        "on-surface-variant": "#c3c6d7",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-secondary": "#263143"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        .glass-panel {
+            background: rgba(45, 52, 73, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #b4c5ff 0%, #2563eb 100%);
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary/30">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl shadow-2xl shadow-black/40 flex justify-between items-center px-6 py-3 w-full">
+<div class="flex items-center gap-8 w-full max-w-7xl mx-auto">
+<!-- Brand Logo -->
+<div class="text-2xl font-bold tracking-tighter text-blue-400 font-headline">Notlar</div>
+<!-- Search Bar -->
+<div class="flex-grow max-w-xl relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="w-full bg-slate-900/50 border-none rounded-lg py-2 pl-10 pr-4 text-slate-100 placeholder:text-slate-500 focus:ring-1 focus:ring-blue-500/50 transition-all text-sm" placeholder="Notlarda ara..." type="text"/>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="primary-gradient text-on-primary font-semibold px-4 py-2 rounded-lg flex items-center gap-2 text-sm transition-transform active:scale-95 duration-100">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">add</span>
+<span>New Note</span>
+</button>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-400 hover:bg-slate-800/50 rounded-lg transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="p-2 text-slate-400 hover:bg-slate-800/50 rounded-lg transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen pt-16">
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-16 bg-slate-900 flex flex-col gap-2 p-4 z-40">
+<div class="mb-6 px-3">
+<h2 class="font-headline font-bold text-slate-100 tracking-tight text-lg">Library</h2>
+<p class="text-slate-400 text-xs tracking-wide">Your digital atelier</p>
+</div>
+<nav class="flex flex-col gap-1">
+<!-- Active Item -->
+<a class="text-blue-400 bg-blue-500/10 rounded-lg px-3 py-2 flex items-center gap-3 font-sans text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="description">description</span>
+<span>All Notes</span>
+</a>
+<a class="text-slate-400 px-3 py-2 hover:bg-slate-800 rounded-lg transition-all flex items-center gap-3 font-sans text-sm tracking-wide cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span>Favorites</span>
+</a>
+<a class="text-slate-400 px-3 py-2 hover:bg-slate-800 rounded-lg transition-all flex items-center gap-3 font-sans text-sm tracking-wide cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="archive">archive</span>
+<span>Archive</span>
+</a>
+<a class="text-slate-400 px-3 py-2 hover:bg-slate-800 rounded-lg transition-all flex items-center gap-3 font-sans text-sm tracking-wide cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+<span>Trash</span>
+</a>
+</nav>
+<!-- Tags Section -->
+<div class="mt-8 px-3">
+<h3 class="font-label text-[10px] font-bold text-slate-500 tracking-[0.1em] uppercase mb-4">Etiketler</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-[11px] font-medium rounded-sm hover:bg-secondary-container transition-colors cursor-pointer">#react</span>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-[11px] font-medium rounded-sm hover:bg-secondary-container transition-colors cursor-pointer">#notlar</span>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-[11px] font-medium rounded-sm hover:bg-secondary-container transition-colors cursor-pointer">#proje</span>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-[11px] font-medium rounded-sm hover:bg-secondary-container transition-colors cursor-pointer">#tasarım</span>
+</div>
+</div>
+<div class="mt-auto pb-4">
+<button class="w-full text-left text-slate-400 px-3 py-2 hover:bg-slate-800 rounded-lg transition-all flex items-center gap-3 font-sans text-sm tracking-wide">
+<span class="material-symbols-outlined text-[20px]" data-icon="help_outline">help_outline</span>
+<span>Help</span>
+</button>
+<button class="w-full text-left text-slate-400 px-3 py-2 hover:bg-slate-800 rounded-lg transition-all flex items-center gap-3 font-sans text-sm tracking-wide">
+<span class="material-symbols-outlined text-[20px]" data-icon="lock">lock</span>
+<span>Privacy</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-grow p-8 bg-background">
+<div class="max-w-6xl mx-auto">
+<div class="flex items-baseline justify-between mb-10">
+<h1 class="text-4xl font-extrabold tracking-tighter text-on-background">Tüm Notlar</h1>
+<span class="text-on-surface-variant text-sm font-label uppercase tracking-widest">128 Toplam Not</span>
+</div>
+<!-- Note Cards Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Feature Card (Larger) -->
+<div class="lg:col-span-2 group relative overflow-hidden rounded-xl bg-surface-container-low p-8 flex flex-col justify-between h-[400px] transition-all hover:bg-surface-container hover:translate-y-[-4px]">
+<div>
+<div class="flex justify-between items-start mb-6">
+<h2 class="text-3xl font-bold text-on-surface tracking-tight group-hover:text-primary transition-colors">React Öğrenme Notları</h2>
+<span class="material-symbols-outlined text-primary/40 group-hover:text-primary transition-colors">auto_awesome</span>
+</div>
+<div class="flex gap-2 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full tracking-wide">#react</span>
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full tracking-wide">#frontend</span>
+</div>
+<div class="font-mono text-sm leading-relaxed text-on-surface-variant line-clamp-6">
+<p class="mb-2">### Hooks Kullanımı</p>
+<p class="mb-2">`useEffect` kullanımı sırasında dependency array'in doğru ayarlanması çok kritik. Infinite loop durumlarından kaçınmak için memoization teknikleri (useMemo, useCallback) kullanılmalı.</p>
+<p>Ayrıca State Management için yeni çıkan kütüphanelerden Zustand oldukça hafif ve hızlı bir alternatif sunuyor.</p>
+</div>
+</div>
+<div class="mt-8 flex items-center justify-between border-t border-white/5 pt-4">
+<span class="text-xs font-label text-slate-500 uppercase tracking-widest">Son düzenleme: 2 saat önce</span>
+<span class="material-symbols-outlined text-slate-500 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Regular Card -->
+<div class="group bg-surface-container-low p-6 rounded-xl flex flex-col justify-between hover:bg-surface-container transition-all hover:translate-y-[-4px]">
+<div>
+<h3 class="text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">Haftalık Plan</h3>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-0.5 bg-slate-800 text-slate-400 text-[10px] font-bold rounded-sm uppercase tracking-wider">#plan</span>
+</div>
+<p class="text-sm leading-relaxed text-on-surface-variant line-clamp-4">
+                                - Proje sunumu için slaytlar hazırlanacak.<br/>
+                                - Kod review seansı yapılacak (Çarşamba).<br/>
+                                - Yeni tasarım sisteminin dökümantasyonu tamamlanacak.
+                            </p>
+</div>
+<div class="mt-6 text-[10px] font-label text-slate-500 uppercase tracking-widest">
+                            3 gün önce
+                        </div>
+</div>
+<!-- Regular Card -->
+<div class="group bg-surface-container-low p-6 rounded-xl flex flex-col justify-between hover:bg-surface-container transition-all hover:translate-y-[-4px]">
+<div>
+<h3 class="text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">Dizayn Trendleri 2024</h3>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-0.5 bg-slate-800 text-slate-400 text-[10px] font-bold rounded-sm uppercase tracking-wider">#tasarım</span>
+</div>
+<p class="text-sm leading-relaxed text-on-surface-variant line-clamp-4 font-mono">
+                                1. Bento Grids Everywhere<br/>
+                                2. High Contrast Type<br/>
+                                3. Subtle Grain Textures<br/>
+                                4. Kinetic Typography
+                            </p>
+</div>
+<div class="mt-6 text-[10px] font-label text-slate-500 uppercase tracking-widest">
+                            1 hafta önce
+                        </div>
+</div>
+<!-- Regular Card -->
+<div class="group bg-surface-container-low p-6 rounded-xl flex flex-col justify-between hover:bg-surface-container transition-all hover:translate-y-[-4px]">
+<div>
+<h3 class="text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">Alışveriş Listesi</h3>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-0.5 bg-slate-800 text-slate-400 text-[10px] font-bold rounded-sm uppercase tracking-wider">#ev</span>
+</div>
+<p class="text-sm leading-relaxed text-on-surface-variant line-clamp-4">
+                                Filtre kahve kağıdı, yulaf ezmesi, badem sütü, avokado, tam tahıllı ekmek.
+                            </p>
+</div>
+<div class="mt-6 text-[10px] font-label text-slate-500 uppercase tracking-widest">
+                            Dün
+                        </div>
+</div>
+<!-- Image / Visual Card -->
+<div class="group relative overflow-hidden rounded-xl h-[300px] flex items-end p-6 transition-all hover:translate-y-[-4px]">
+<img alt="Portrait" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Modern minimalist aesthetic portrait with soft dramatic lighting and deep shadows, muted blue tones to match dark UI" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAui-ceKDzc4GjB4eL6N9pGQKfx_l6j-LHjE4HEcd_QZCrG5CnPtbk4A7_TQL37H4OTm1XLzmOMQr9n7h4Gdiia_5yd5DqYw-j85xbzy5pPwl7FGhgTWMrqILV15656N0EFVXgrXvZLmtcu_J1ybm3gK09QwhAkr2MLa4er33ccVG3AttGsPpVEAVbxXXsRMbC1CZkN3JOkgn4cfZYjGN81KAmlyTzRsNcUPxH_dr4MRL1t2SO0L6sB916EHTGy0VyTcZedB4S_DpY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+<div class="relative z-10">
+<h3 class="text-xl font-bold text-white mb-1">Portfolyo Taslakları</h3>
+<p class="text-xs text-slate-300 font-label uppercase tracking-widest">Görsel Koleksiyon</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Action Button for Mobile (Suppressed on Desktop) -->
+<button class="md:hidden fixed bottom-8 right-8 w-14 h-14 primary-gradient rounded-full shadow-2xl flex items-center justify-center text-on-primary z-50 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</body></html>

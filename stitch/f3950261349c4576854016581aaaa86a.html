@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#b4c5ff",
+                    "primary-container": "#2563eb",
+                    "on-primary": "#002a78",
+                    "outline": "#8d90a0",
+                    "primary": "#b4c5ff",
+                    "inverse-primary": "#0053db",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "inverse-surface": "#dae2fd",
+                    "tertiary": "#ffb596",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary-fixed": "#360f00",
+                    "background": "#0b1326",
+                    "secondary-fixed": "#d8e3fb",
+                    "surface-bright": "#31394d",
+                    "outline-variant": "#434655",
+                    "tertiary-fixed-dim": "#ffb596",
+                    "on-primary-fixed": "#00174b",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#bc4800",
+                    "surface-container-high": "#222a3d",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-container-lowest": "#060e20",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-low": "#131b2e",
+                    "on-tertiary": "#581e00",
+                    "on-background": "#dae2fd",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "surface-container-highest": "#2d3449",
+                    "inverse-on-surface": "#283044",
+                    "tertiary-fixed": "#ffdbcd",
+                    "surface-variant": "#2d3449",
+                    "on-error": "#690005",
+                    "on-secondary-fixed-variant": "#3c475a",
+                    "on-tertiary-container": "#ffede6",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary-fixed": "#111c2d",
+                    "surface-dim": "#0b1326",
+                    "secondary": "#bcc7de",
+                    "error-container": "#93000a",
+                    "on-surface": "#dae2fd",
+                    "secondary-container": "#3e495d",
+                    "surface-container": "#171f33",
+                    "surface": "#0b1326",
+                    "on-secondary-container": "#aeb9d0",
+                    "on-surface-variant": "#c3c6d7",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-secondary": "#263143"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"],
+                    "mono": ["JetBrains Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl shadow-2xl shadow-black/40 flex justify-between items-center px-6 py-3 w-full">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tighter text-blue-400">Notlar</span>
+<div class="hidden md:flex items-center bg-slate-900/50 rounded-lg px-3 py-1.5 gap-2 group focus-within:ring-1 ring-blue-500/50 transition-all">
+<span class="material-symbols-outlined text-slate-400 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-slate-100 placeholder-slate-500 w-64" placeholder="Notlarda ara..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center gap-2 bg-gradient-to-br from-primary to-primary-container text-on-primary px-4 py-2 rounded-lg font-semibold text-sm active:scale-95 duration-100 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Note
+            </button>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-400 hover:bg-slate-800/50 transition-colors duration-200 rounded-lg active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 text-slate-400 hover:bg-slate-800/50 transition-colors duration-200 rounded-lg active:scale-95">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex pt-16 h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-16 bg-slate-900 flex flex-col gap-2 p-4">
+<div class="px-3 py-4 mb-2">
+<h2 class="text-xs font-bold uppercase tracking-widest text-slate-500">Library</h2>
+<p class="text-[10px] text-slate-600 mt-0.5">Your digital atelier</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="text-blue-400 bg-blue-500/10 rounded-lg px-3 py-2 flex items-center gap-3 font-semibold group cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>All Notes</span>
+</a>
+<a class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all group cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">star</span>
+<span>Favorites</span>
+</a>
+<a class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all group cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">archive</span>
+<span>Archive</span>
+</a>
+<a class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all group cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">delete</span>
+<span>Trash</span>
+</a>
+<a class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all group cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<button class="mt-4 mx-3 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 text-slate-300 py-2 rounded-lg text-xs font-medium transition-all active:scale-95">
+                New Collection
+            </button>
+<div class="mt-auto border-t border-slate-800 pt-4 flex flex-col gap-1">
+<a class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all text-sm group cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined text-lg">help_outline</span>
+<span>Help</span>
+</a>
+<a class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all text-sm group cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined text-lg">lock</span>
+<span>Privacy</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 bg-surface-dim relative flex items-center justify-center p-8 overflow-y-auto">
+<!-- Empty State Container -->
+<div class="max-w-xl w-full flex flex-col items-center text-center">
+<!-- Digital Atelier Visual Anchor -->
+<div class="relative mb-12">
+<!-- Layered Paper Aesthetic -->
+<div class="absolute -top-6 -left-6 w-32 h-40 bg-surface-container-low rounded-xl rotate-[-12deg] opacity-40"></div>
+<div class="absolute -top-4 -right-4 w-36 h-44 bg-surface-container-high rounded-xl rotate-[8deg] opacity-60 shadow-xl"></div>
+<!-- Main Focal Icon Card -->
+<div class="relative w-48 h-56 bg-surface-container-highest rounded-2xl flex items-center justify-center shadow-2xl overflow-hidden border border-outline-variant/10">
+<!-- Subtle Gradient Texture -->
+<div class="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent"></div>
+<div class="relative flex flex-col items-center">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+</div>
+<div class="space-y-2 px-6 w-full">
+<div class="h-1.5 w-full bg-outline-variant/30 rounded-full"></div>
+<div class="h-1.5 w-3/4 bg-outline-variant/30 rounded-full"></div>
+<div class="h-1.5 w-5/6 bg-outline-variant/30 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Text Content -->
+<h1 class="text-3xl font-extrabold tracking-tight text-on-surface mb-3 headline-lg">
+                    Henüz notunuz yok.
+                </h1>
+<p class="text-lg text-on-surface-variant mb-10 max-w-sm body-lg leading-relaxed">
+                    İlk notunuzu oluşturun! Fikirlerinizi, planlarınızı ve hayallerinizi buraya kaydedin.
+                </p>
+<!-- Primary Action -->
+<div class="flex flex-col items-center gap-4">
+<button class="group relative flex items-center gap-3 bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-primary-container/20 hover:shadow-primary-container/40 transition-all active:scale-95 duration-100">
+<span class="material-symbols-outlined">add_circle</span>
+                        Yeni Not Oluştur
+                    </button>
+<button class="text-on-surface-variant hover:text-primary text-sm font-medium transition-colors py-2 flex items-center gap-2 active:opacity-70">
+<span class="material-symbols-outlined text-sm">auto_fix_high</span>
+                        Örnek şablonları keşfedin
+                    </button>
+</div>
+</div>
+<!-- Background Decorative Elements -->
+<div class="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-blue-500/5 rounded-full blur-[80px] pointer-events-none"></div>
+</main>
+</div>
+<!-- Mobile Navigation Overlay (Responsive Pivot) -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-lg px-6 py-4 flex justify-between items-center z-50">
+<a class="text-blue-400 flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px] font-medium">Notlar</span>
+</a>
+<a class="text-slate-400 flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="text-[10px] font-medium">Favoriler</span>
+</a>
+<div class="relative -top-8">
+<button class="w-14 h-14 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full shadow-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+<a class="text-slate-400 flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">archive</span>
+<span class="text-[10px] font-medium">Arşiv</span>
+</a>
+<a class="text-slate-400 flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">Ayarlar</span>
+</a>
+</div>
+</body></html>

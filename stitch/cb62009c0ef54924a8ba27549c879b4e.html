@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#b4c5ff",
+                    "primary-container": "#2563eb",
+                    "on-primary": "#002a78",
+                    "outline": "#8d90a0",
+                    "primary": "#b4c5ff",
+                    "inverse-primary": "#0053db",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "inverse-surface": "#dae2fd",
+                    "tertiary": "#ffb596",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary-fixed": "#360f00",
+                    "background": "#0b1326",
+                    "secondary-fixed": "#d8e3fb",
+                    "surface-bright": "#31394d",
+                    "outline-variant": "#434655",
+                    "tertiary-fixed-dim": "#ffb596",
+                    "on-primary-fixed": "#00174b",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#bc4800",
+                    "surface-container-high": "#222a3d",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-container-lowest": "#060e20",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-low": "#131b2e",
+                    "on-tertiary": "#581e00",
+                    "on-background": "#dae2fd",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "surface-container-highest": "#2d3449",
+                    "inverse-on-surface": "#283044",
+                    "tertiary-fixed": "#ffdbcd",
+                    "surface-variant": "#2d3449",
+                    "on-error": "#690005",
+                    "on-secondary-fixed-variant": "#3c475a",
+                    "on-tertiary-container": "#ffede6",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary-fixed": "#111c2d",
+                    "surface-dim": "#0b1326",
+                    "secondary": "#bcc7de",
+                    "error-container": "#93000a",
+                    "on-surface": "#dae2fd",
+                    "secondary-container": "#3e495d",
+                    "surface-container": "#171f33",
+                    "surface": "#0b1326",
+                    "on-secondary-container": "#aeb9d0",
+                    "on-surface-variant": "#c3c6d7",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-secondary": "#263143"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"],
+                    "mono": ["JetBrains Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(45, 52, 73, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #b4c5ff 0%, #2563eb 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl shadow-2xl shadow-black/40 flex justify-between items-center px-6 py-3 w-full">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tighter text-blue-400">Notlar</span>
+<div class="relative group">
+<div class="flex items-center gap-3 bg-slate-900/50 px-4 py-2 rounded-lg text-slate-400 font-sans tracking-tight w-96 border border-transparent focus-within:border-blue-500/30 transition-all duration-200">
+<span class="material-symbols-outlined text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 p-0 text-slate-100 placeholder-slate-500 w-full" readonly="" type="text" value="bilinmeyen kelime"/>
+<span class="material-symbols-outlined text-sm cursor-pointer hover:text-blue-400">cancel</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg font-semibold flex items-center gap-2 hover:bg-slate-800/50 transition-colors duration-200 active:scale-95 duration-100">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                New Note
+            </button>
+<div class="flex items-center gap-2">
+<div class="p-2 text-slate-400 hover:bg-slate-800/50 transition-colors duration-200 rounded-lg cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</div>
+<div class="p-2 text-slate-400 hover:bg-slate-800/50 transition-colors duration-200 rounded-lg cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<div class="flex pt-16 h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-16 bg-slate-900 flex flex-col gap-2 p-4 z-40">
+<div class="mb-4 px-3">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Library</h3>
+<p class="text-[10px] text-slate-600">Your digital atelier</p>
+</div>
+<nav class="flex flex-col gap-1">
+<div class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all cursor-pointer active:opacity-80 group">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="font-sans text-sm tracking-wide">All Notes</span>
+</div>
+<div class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="font-sans text-sm tracking-wide">Favorites</span>
+</div>
+<div class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined text-[20px]">archive</span>
+<span class="font-sans text-sm tracking-wide">Archive</span>
+</div>
+<div class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span class="font-sans text-sm tracking-wide">Trash</span>
+</div>
+<div class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-sans text-sm tracking-wide">Settings</span>
+</div>
+</nav>
+<div class="mt-8 px-3">
+<button class="w-full py-2 px-4 rounded-lg bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-widest hover:bg-blue-500/20 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">folder_open</span>
+                    New Collection
+                </button>
+</div>
+<div class="mt-auto pb-4 flex flex-col gap-1 border-t border-slate-800/50 pt-4">
+<div class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all cursor-pointer text-xs">
+<span class="material-symbols-outlined text-[18px]">help_outline</span>
+                    Help
+                </div>
+<div class="text-slate-400 px-3 py-2 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all cursor-pointer text-xs">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+                    Privacy
+                </div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 h-full overflow-y-auto bg-surface relative flex items-center justify-center p-12">
+<!-- Bento Grid Background Pattern -->
+<div class="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-8 opacity-[0.03] pointer-events-none p-12">
+<div class="bg-primary rounded-xl col-span-2 row-span-2"></div>
+<div class="bg-primary rounded-xl col-span-3 row-span-1"></div>
+<div class="bg-primary rounded-xl col-span-1 row-span-3"></div>
+<div class="bg-primary rounded-xl col-span-2 row-span-2"></div>
+<div class="bg-primary rounded-xl col-span-2 row-span-4"></div>
+<div class="bg-primary rounded-xl col-span-2 row-span-1"></div>
+</div>
+<!-- Empty State Container -->
+<div class="max-w-xl w-full flex flex-col items-center text-center z-10 animate-fade-in">
+<!-- Visual Icon Anchor -->
+<div class="relative mb-10">
+<div class="w-32 h-32 editorial-gradient rounded-full opacity-10 absolute inset-0 blur-3xl transform -translate-y-4"></div>
+<div class="w-24 h-24 glass-panel rounded-[2rem] flex items-center justify-center shadow-2xl relative border border-outline-variant/10">
+<span class="material-symbols-outlined text-6xl text-primary font-light">search_off</span>
+</div>
+</div>
+<!-- Editorial Copy -->
+<h1 class="text-4xl font-extrabold tracking-tighter text-on-surface mb-6 font-headline">
+                    Sonuç bulunamadı
+                </h1>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-10 max-w-md font-body">
+                    Aramanıza uygun not bulunamadı. Lütfen farklı anahtar kelimeler deneyin veya yeni bir not oluşturun.
+                </p>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<button class="editorial-gradient text-on-primary px-8 py-3 rounded-lg font-bold text-sm tracking-wide hover:opacity-90 transition-all active:scale-95 flex items-center gap-2 shadow-lg shadow-blue-900/20">
+<span class="material-symbols-outlined text-[18px]">backspace</span>
+                        Aramayı temizle
+                    </button>
+<button class="bg-surface-container-highest text-on-surface-variant px-8 py-3 rounded-lg font-bold text-sm tracking-wide border border-outline-variant/20 hover:bg-surface-bright hover:text-on-surface transition-all active:scale-95">
+                        Tüm Notlara Dön
+                    </button>
+</div>
+<!-- Subtle Tip Component -->
+<div class="mt-16 flex items-center gap-3 px-5 py-3 rounded-full bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-tertiary text-sm">lightbulb</span>
+<span class="text-xs font-label uppercase tracking-widest text-on-surface-variant">İpucu: Etiketleri kullanarak aramayı daraltabilirsiniz (#fatura, #okul)</span>
+</div>
+</div>
+<!-- Floating Decorative Element -->
+<div class="absolute bottom-12 right-12 opacity-40">
+<img alt="aesthetic close-up of dark textured paper and a high-end fountain pen with soft lighting" class="w-48 h-48 object-cover rounded-2xl grayscale mix-blend-screen" data-alt="close-up of premium dark textured stationery paper and a minimalist fountain pen in a dimly lit designer studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD31vXmIzSiJw7YkICbnwRqmvgmqjeJtQaVOATvqT-yg0rJ8mL-TW8dYE4CLOVDQOBvtdqQHHmzQvjgNdx-3M9g55pNWXAxciWwmmYZyjdL6xvoFnnpnR4I-Rob3vHiTrqnAb_INiLNVWxczInYprCpHspUqYIsDlC1TTjwptzVI9a4u3CXVsoUeqJRgDlDyIB-xQYAs14SNg0D8pDou81j8x3oAJ2um4AcQuFMgzNtPEnSxhRQJpH-uehfDbi8TdGKxfwp-s4MpRA"/>
+</div>
+</main>
+</div>
+<!-- Mobile FAB Suppression as per Protocol (Hiding for Desktop Flow) -->
+<button class="md:hidden fixed bottom-6 right-6 w-14 h-14 rounded-full editorial-gradient shadow-2xl flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">add</span>
+</button>
+</body></html>
