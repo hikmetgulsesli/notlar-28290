@@ -5,7 +5,7 @@ import { HomePage } from './pages/HomePage';
 import { SearchPage } from './pages/SearchPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { EditorPage } from './pages/EditorPage';
-import { NoteDetailPage } from './pages/NoteDetailPage';
+import { NoteDetail } from './components/NoteDetail';
 import './index.css';
 
 export function App() {
@@ -23,7 +23,7 @@ export function App() {
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/editor" element={<EditorPage />} />
                 <Route path="/editor/:id" element={<EditorPage />} />
-                <Route path="/note/:id" element={<NoteDetailPage />} />
+                <Route path="/note/:id" element={<NoteDetail />} />
               </Routes>
             </div>
           </main>
