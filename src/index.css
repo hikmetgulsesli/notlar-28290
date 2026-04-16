@@ -1,10 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 @import '../stitch/design-tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --font-headline: 'Inter', system-ui, sans-serif;
@@ -40,4 +40,67 @@ body {
   .btn-primary {
     @apply primary-gradient text-on-primary font-semibold px-4 py-2 rounded-lg flex items-center gap-2 text-sm transition-transform active:scale-95 duration-100;
   }
+}
+
+/* Markdown Preview Styles */
+.markdown-preview h1 {
+  @apply text-3xl font-bold text-on-surface mt-6 mb-3 tracking-tight;
+}
+.markdown-preview h2 {
+  @apply text-2xl font-bold text-on-surface mt-5 mb-2 tracking-tight;
+}
+.markdown-preview h3 {
+  @apply text-xl font-bold text-on-surface mt-4 mb-2;
+}
+.markdown-preview h4 {
+  @apply text-lg font-bold text-on-surface mt-3 mb-2;
+}
+.markdown-preview p {
+  @apply text-on-surface-variant leading-relaxed my-3;
+}
+.markdown-preview blockquote {
+  @apply border-l-4 border-primary pl-4 my-3 text-on-surface-variant italic;
+}
+.markdown-preview ul {
+  @apply my-3 list-disc ml-6;
+}
+.markdown-preview ol {
+  @apply my-3 list-decimal ml-6;
+}
+.markdown-preview li {
+  @apply text-on-surface mb-1;
+}
+.markdown-preview pre {
+  @apply bg-surface-variant rounded-lg p-4 my-3 overflow-x-auto;
+}
+.markdown-preview code {
+  font-family: 'JetBrains Mono', monospace;
+  @apply text-sm;
+}
+.markdown-preview p code,
+.markdown-preview li code {
+  @apply bg-surface-variant text-on-surface px-1.5 py-0.5 rounded;
+}
+.markdown-preview pre code {
+  @apply text-on-surface leading-relaxed;
+}
+.markdown-preview strong {
+  @apply text-on-surface font-semibold;
+}
+.markdown-preview em {
+  @apply text-on-surface italic;
+}
+.markdown-preview a {
+  @apply text-primary hover:underline;
+}
+.markdown-preview hr {
+  border-color: var(--color-outline-variant);
+  opacity: 0.2;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Editor textarea focus */
+.editor-textarea:focus {
+  outline: none;
 }
